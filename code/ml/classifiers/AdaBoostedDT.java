@@ -10,16 +10,15 @@ public class AdaBoostedDT implements Classifier {
 
 	@Override
 	public void train(DataSet data) {
-		// TODO Auto-generated method stub
 
 		// 1. Assign equal weights to all the data points
 
 		for (Example e : data.getData()) {
 			e.setWeight(1 / data.getData().size());
 		}
-		
-		for(int i = 0; i < 100; i++) {
-			
+
+		for (int i = 0; i < 100; i++) {
+
 		}
 
 		// 2. Find the stump that does the best job classifying the new collection of
