@@ -4,37 +4,42 @@ import ml.classifiers.DecisionTreeClassifier;
 
 public class Experiments {
 	public static void main(String[] args) {
-		DataSet d1 = new DataSet("/Users/aidangarton/Desktop/Java/final-project-starter/data/new/student-mat.csv",
-				DataSet.CSVFILE);
-//		
-//		System.out.println(d1.getFeatureMap());
-//
-//		System.out.println(d1.getData().size());
-//		for (Example e : d1.getData()) {
+		String rootDir = "/Users/aidangarton/Desktop/Java/final-project-starter/data/new/";
+		DataSet d1 = new DataSet(rootDir + "new.csv", DataSet.CSVFILE);
+
+		double count = 0, total = 0;
+		for (Example e : d1.getData()) {
+			if (e.getLabel() == 5) {
+				count++;
+			}
+			total++;
 //			System.out.println(e.getFeatureSet().size());
-//		}
+		}
+		System.out.println(count / total);
 
 		CrossValidationSet cvs = new CrossValidationSet(d1, 10);
 
 		double c = 0, t = 0;
 
-		for (int i = 0; i < 1; i++) {
-			DataSetSplit dss = cvs.getValidationSet(i);
+		for (int j = 0; j < 15; j++) {
 
-			DecisionTreeClassifier dtc = new DecisionTreeClassifier();
-			dtc.setDepthLimit(3);
+			for (int i = 0; i < 10; i++) {
+				DataSetSplit dss = cvs.getValidationSet(i);
 
-			dtc.train(dss.getTrain());
-			System.out.println(dtc);
+				DecisionTreeClassifier dtc = new DecisionTreeClassifier();
+				dtc.setDepthLimit(j);
 
-			for (Example e : dss.getTrain().getData()) {
-				if (dtc.classify(e) == e.getLabel()) {
-					c++;
+				dtc.train(dss.getTrain());
+//				System.out.println(dtc);
+
+				for (Example e : dss.getTest().getData()) {
+					if (dtc.classify(e) == e.getLabel()) {
+						c++;
+					}
+					t++;
 				}
-				t++;
 			}
+			System.out.println("(" + j + "," + 100 * c / t + ")");
 		}
-
-		System.out.println(c / t);
 	}
 }
