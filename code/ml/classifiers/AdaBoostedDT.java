@@ -111,4 +111,14 @@ public class AdaBoostedDT implements Classifier {
 		return retFeature;
 	}
 
+	public static void main(String[] args) {
+		DataSet d1 = new DataSet("/Users/aidangarton/Desktop/Java/final-project-starter/data/new/student-mat.csv",
+				DataSet.CSVFILE);
+		
+		System.out.println(d1.getData().size());
+		for(Example e : d1.getData()) {
+			System.out.println(e);
+		}
+	}
+
 }
