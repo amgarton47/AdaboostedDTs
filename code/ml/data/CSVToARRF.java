@@ -166,7 +166,7 @@ public class CSVToARRF {
 
 	public static void main(String[] args) {
 		CSVToARRF cta = new CSVToARRF("/Users/aidangarton/Downloads/student/student-mat.csv",
-				"/Users/aidangarton/Desktop/Java/final-project-starter/data/new.arff");
+				"/Users/aidangarton/Desktop/Java/final-project-starter/data/student-mat.arff");
 	}
 
 }
